@@ -1,0 +1,26 @@
+/* https://colorhunt.co/palette/331d2c3f2e3ea78295efe1d1 */
+
+body {
+  background-color: #331d2c;
+  background-image: url("./background.png");
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: calc(100vh - 100px);
+  padding: 1rem;
+  font-family: "Architects Daughter", cursive;
+}
+
+.card {
+  width: 400px;
+  height: 600px;
+  background-color: #a78295;
+  border-radius: 10px;
+}
+
+.timer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 60px;
+}
