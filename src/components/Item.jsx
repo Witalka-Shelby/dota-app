@@ -5,7 +5,7 @@ import ListItemIcon from "@mui/material/ListItemIcon";
 import ListItemText from "@mui/material/ListItemText";
 import Switch from "@mui/material/Switch";
 
-function Item() {
+function Item(props) {
   const [checked, setChecked] = React.useState(["wifi"]);
 
   const handleToggle = (value) => () => {
@@ -20,12 +20,13 @@ function Item() {
 
     setChecked(newChecked);
   };
+
   return (
     <ListItem>
       <ListItemIcon>
         <h3>Icon</h3>
       </ListItemIcon>
-      <ListItemText id="switch-list-label-wifi" primary="Wi-Fi" />
+      <ListItemText id="switch-list-label-wifi" primary={props.runeName} />
       <Switch
         edge="end"
         onChange={handleToggle("wifi")}

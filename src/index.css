@@ -1,6 +1,7 @@
 /* https://colorhunt.co/palette/331d2c3f2e3ea78295efe1d1 */
 
 body {
+  color: #efe1d1;
   background-color: #331d2c;
   background-image: url("./background.png");
   display: flex;
@@ -14,7 +15,7 @@ body {
 .card {
   width: 400px;
   height: 600px;
-  background-color: #a78295;
+  background-color: #3f2e3e;
   border-radius: 10px;
 }
 
