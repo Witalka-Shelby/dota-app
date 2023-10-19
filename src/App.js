@@ -6,6 +6,17 @@ import TimingsList from "./components/TimingsList";
 
 function App() {
   const [expand, setExpand] = React.useState(false);
+  const [count, setCount] = React.useState(0);
+
+  React.useEffect(() => {
+    //Implementing the setInterval method
+    const interval = setInterval(() => {
+      setCount(count + 1);
+    }, 1000);
+
+    //Clearing the interval
+    return () => clearInterval(interval);
+  }, [count]);
 
   function handleClick() {
     setExpand((prevState) => {
@@ -20,10 +31,14 @@ function App() {
         style={expand ? { height: "600px" } : { height: "100px" }}
       >
         <div className="timer">
-          <Timer />
+          <Timer time={count} />
         </div>
         <div className="timings">
-          <TimingsList toggleCard={handleClick} expandCard={expand} />
+          <TimingsList
+            time={count}
+            toggleCard={handleClick}
+            expandCard={expand}
+          />
         </div>
       </div>
     </div>

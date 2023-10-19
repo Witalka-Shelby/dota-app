@@ -26,7 +26,11 @@ function Item(props) {
       <ListItemIcon>
         <h3>Icon</h3>
       </ListItemIcon>
-      <ListItemText id="switch-list-label-wifi" primary={props.runeName} />
+      <ListItemText
+        id="switch-list-label-wifi"
+        primary={props.runeName}
+        secondary={props.runeTime}
+      />
       <Switch
         edge="end"
         onChange={handleToggle("wifi")}
