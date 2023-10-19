@@ -27,7 +27,7 @@ function Item(props) {
         <h3>Icon</h3>
       </ListItemIcon>
       <ListItemText
-        id="switch-list-label-wifi"
+        id={props.id}
         primary={props.runeName}
         secondary={props.runeTime}
       />

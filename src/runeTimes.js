@@ -11,6 +11,10 @@ const runeTimes = [
     name: "Lotus",
     time: 3,
   },
+  {
+    name: "Vita",
+    time: 1,
+  },
 ];
 
 export default runeTimes;

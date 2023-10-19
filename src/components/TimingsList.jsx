@@ -33,12 +33,24 @@ export default function SwitchListSecondary(props) {
       }
     >
       <Collapse timeout="auto" in={props.expandCard}>
-        {runeTimes.map((rune) => {
-          return <Item runeName={rune.name} runeTime={rune.time} />;
+        {runeTimes.map((rune, index) => {
+          if (rune.time * 60 === props.time + 15) {
+            handleClickOpen();
+          }
+          return (
+            <div>
+              <RuneAlert state={open} text={rune.name} />
+              <Item
+                key={index}
+                id={index}
+                runeName={rune.name}
+                runeTime={rune.time}
+              />
+            </div>
+          );
         })}
         <Button onClick={handleClickOpen}>Test</Button>
       </Collapse>
-      <RuneAlert state={open} text={"Bounty Rune"} />
     </List>
   );
 }
