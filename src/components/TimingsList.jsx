@@ -17,6 +17,21 @@ export default function SwitchListSecondary(props) {
     }, 5000);
   }
 
+  // console.log(props.time % 60);
+  // if (props.time % 60 === 0) {
+  //   console.log("1 min rune");
+  // }
+  React.useEffect(() => {
+    const interval = setInterval(() => {
+      console.log("10sec");
+      handleClickOpen();
+    }, 10000);
+
+    return () => clearInterval(interval);
+  }, []);
+
+  // setInterval(handleClickOpen, 10000);
+
   return (
     <List
       sx={{ width: "100%", maxWidth: "100%" }}
@@ -34,12 +49,8 @@ export default function SwitchListSecondary(props) {
     >
       <Collapse timeout="auto" in={props.expandCard}>
         {runeTimes.map((rune, index) => {
-          if (rune.time * 60 === props.time + 15) {
-            handleClickOpen();
-          }
           return (
             <div>
-              <RuneAlert state={open} text={rune.name} />
               <Item
                 key={index}
                 id={index}
@@ -50,6 +61,7 @@ export default function SwitchListSecondary(props) {
           );
         })}
         <Button onClick={handleClickOpen}>Test</Button>
+        <RuneAlert state={open} text={"test"} />
       </Collapse>
     </List>
   );
