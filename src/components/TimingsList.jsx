@@ -4,50 +4,26 @@ import ListSubheader from "@mui/material/ListSubheader";
 import Item from "./Item";
 import Collapse from "@mui/material/Collapse";
 import runeTimes from "../runeTimes";
-import RuneAlert from "./RuneAlert";
-import Button from "@mui/material/Button";
 
-export default function SwitchListSecondary(props) {
-  const [open, setOpen] = React.useState(false);
-
-  function handleClickOpen() {
-    setOpen(true);
-    setTimeout(() => {
-      setOpen(false);
-    }, 5000);
-  }
-
-  // console.log(props.time % 60);
-  // if (props.time % 60 === 0) {
-  //   console.log("1 min rune");
-  // }
-  React.useEffect(() => {
-    const interval = setInterval(() => {
-      console.log("10sec");
-      handleClickOpen();
-    }, 10000);
-
-    return () => clearInterval(interval);
-  }, []);
-
-  // setInterval(handleClickOpen, 10000);
-
+export default function SwitchListSecondary({ expandCard, toggleCard }) {
   return (
     <List
+      key={"runeTimingsList"}
       sx={{ width: "100%", maxWidth: "100%" }}
       subheader={
         <ListSubheader
+          key={"runeTimingsListHeader"}
           onClick={() => {
-            props.toggleCard();
+            toggleCard();
           }}
           style={{ backgroundColor: "#A78295" }}
           color="inherit"
         >
-          {props.expandCard ? "Timings" : "Open Timings"}
+          {expandCard ? "Timings" : "Open Timings"}
         </ListSubheader>
       }
     >
-      <Collapse timeout="auto" in={props.expandCard}>
+      <Collapse key={"runeTimingsListCollapse"} timeout="auto" in={expandCard}>
         {runeTimes.map((rune, index) => {
           return (
             <div>
@@ -60,8 +36,6 @@ export default function SwitchListSecondary(props) {
             </div>
           );
         })}
-        <Button onClick={handleClickOpen}>Test</Button>
-        <RuneAlert state={open} text={"test"} />
       </Collapse>
     </List>
   );
