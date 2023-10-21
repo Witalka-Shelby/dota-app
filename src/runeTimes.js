@@ -1,19 +1,28 @@
 const runeTimes = [
   {
-    name: "Bounty",
+    name: "bounty",
     time: 3,
+    text: "Bounty / Lotus",
   },
   {
-    name: "Water",
+    name: "power",
     time: 2,
+    text: "Water / Power",
   },
   {
-    name: "Lotus",
-    time: 3,
+    name: "wisdom",
+    time: 7,
+    text: "Wisdom",
   },
   {
-    name: "Vita",
-    time: 1,
+    name: "day",
+    time: 5,
+    text: "Day / Night",
+  },
+  {
+    name: "tormentor",
+    time: 20,
+    text: "Tormentor",
   },
 ];
 

@@ -20,8 +20,8 @@ export default function SwitchListSecondary({ expandCard, toggleCard }) {
             borderBottomRightRadius: !expandCard ? "9px" : "0px",
           }}
           key={"runeTimingsListHeader"}
-          onClick={() => {
-            toggleCard();
+          onClick={(event) => {
+            toggleCard(event);
           }}
           color="inherit"
         >
@@ -37,7 +37,9 @@ export default function SwitchListSecondary({ expandCard, toggleCard }) {
                 key={index}
                 id={index}
                 runeName={rune.name}
+                runeText={rune.text}
                 runeTime={rune.time}
+                toggleRune={toggleCard}
               />
             </div>
           );

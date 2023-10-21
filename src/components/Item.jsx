@@ -5,7 +5,7 @@ import ListItemText from "@mui/material/ListItemText";
 import Switch from "@mui/material/Switch";
 
 function Item(props) {
-  const [checked, setChecked] = React.useState(["wifi"]);
+  const [checked, setChecked] = React.useState([`${props.runeName}`]);
 
   const handleToggle = (value) => () => {
     const currentIndex = checked.indexOf(value);
@@ -16,7 +16,7 @@ function Item(props) {
     } else {
       newChecked.splice(currentIndex, 1);
     }
-
+    props.toggleRune(value);
     setChecked(newChecked);
   };
 
@@ -27,15 +27,16 @@ function Item(props) {
       </ListItemIcon>
       <ListItemText
         id={props.id}
-        primary={props.runeName}
-        secondary={props.runeTime}
+        className="runeTimeText"
+        primary={props.runeText}
+        secondary={`${props.runeTime} Min`}
       />
       <Switch
         edge="end"
-        onChange={handleToggle("wifi")}
-        checked={checked.indexOf("wifi") !== -1}
+        onChange={handleToggle(props.runeName)}
+        checked={checked.indexOf(props.runeName) !== -1}
         inputProps={{
-          "aria-labelledby": "switch-list-label-wifi",
+          "aria-labelledby": `switch-list-label-${props.runeName}`,
         }}
       />
     </ListItem>
