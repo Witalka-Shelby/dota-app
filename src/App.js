@@ -1,33 +1,64 @@
-import React from "react";
+import { useState, useEffect } from "react";
 import logo from "./logo.svg";
 import "./App.css";
-import Timer from "./components/Timer";
-import TimingsList from "./components/TimingsList";
-import RuneAlert from "./components/RuneAlert";
 import Button from "@mui/material/Button";
+import Card from "./components/Card";
 
 function App() {
-  const [expand, setExpand] = React.useState(false);
-  const [count, setCount] = React.useState(0);
+  const [expand, setExpand] = useState(false);
+  const [count, setCount] = useState(0);
+  const [rune, setRune] = useState(false);
+  let [runeMessage, setRuneMessage] = useState("");
+  const [pause, setPause] = useState(false);
 
-  const [rune, setRune] = React.useState(false);
-
-  React.useEffect(() => {
+  useEffect(() => {
     //Implementing the setInterval method
     const interval = setInterval(() => {
-      setCount(count + 1);
-      if (count % 10 === 0) {
+      let message = "";
+
+      // Bounty 3 min
+      if (count % 180 === 0) {
+        message += "Bounty \n";
+        if (count >= 60) {
+          message += "Lotus \n";
+        }
         setRune(true);
-      } else {
-        console.log("rune off");
+        setTimeout(() => setRune(false), 5000);
       }
-    }, 1000);
+      // Power 2 min
+      if (count % 120 === 0) {
+        if (count > 60) {
+          if (count < 300) {
+            message += "Water \n";
+          } else {
+            message += "Power \n";
+          }
+          setRune(true);
+          setTimeout(() => setRune(false), 5000);
+        }
+      }
+
+      if (message !== "") {
+        setRuneMessage(message);
+      }
+
+      if (!pause) {
+        setCount(count + 1);
+      }
+    }, 250);
 
     //Clearing the interval
     return () => clearInterval(interval);
   }, [count, rune]);
 
-  function handleClick() {
+  function handleClick(event) {
+    console.log(event);
+    if (event !== undefined) {
+      setPause((prevVal) => {
+        console.log(prevVal);
+        return !prevVal;
+      });
+    }
     setExpand((prevState) => {
       return !prevState;
     });
@@ -35,21 +66,14 @@ function App() {
   return (
     <div className="App">
       <h1 className="title">Dota 2 Timer</h1>
-      <div
-        className="card"
-        style={expand ? { height: "600px" } : { height: "100px" }}
-      >
-        <div className="timer">
-          <Timer time={count} />
-        </div>
-        <div className="timings">
-          <TimingsList toggleCard={handleClick} expandCard={expand} />
-        </div>
-        <div>
-          {/* <Button onClick={handleClickOpen}>Test</Button> */}
-          <RuneAlert runeTrigger={rune} changeRune={setRune} text={"test"} />
-        </div>
-      </div>
+      <Button onClick={handleClick}>pause</Button>
+      <Card
+        expand={expand}
+        handleClick={handleClick}
+        rune={rune}
+        runeMessage={runeMessage}
+        count={count}
+      />
     </div>
   );
 }

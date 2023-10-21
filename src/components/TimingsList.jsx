@@ -9,6 +9,7 @@ export default function SwitchListSecondary({ expandCard, toggleCard }) {
   return (
     <List
       key={"runeTimingsList"}
+      className="timings"
       sx={{ width: "100%", maxWidth: "100%" }}
       subheader={
         <ListSubheader
