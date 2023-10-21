@@ -13,11 +13,16 @@ export default function SwitchListSecondary({ expandCard, toggleCard }) {
       sx={{ width: "100%", maxWidth: "100%" }}
       subheader={
         <ListSubheader
+          className="timingsHeader"
+          style={{
+            backgroundColor: "#A78295",
+            borderBottomLeftRadius: !expandCard ? "9px" : "0px",
+            borderBottomRightRadius: !expandCard ? "9px" : "0px",
+          }}
           key={"runeTimingsListHeader"}
           onClick={() => {
             toggleCard();
           }}
-          style={{ backgroundColor: "#A78295" }}
           color="inherit"
         >
           {expandCard ? "Timings" : "Open Timings"}

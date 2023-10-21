@@ -12,7 +12,9 @@ export default function Card({
   return (
     <div
       className="card"
-      style={expand ? { height: "600px" } : { height: "100px" }}
+      style={{
+        height: expand ? "600px" : "148px",
+      }}
     >
       <Timer time={count} />
       <TimingsList toggleCard={handleClick} expandCard={expand} />

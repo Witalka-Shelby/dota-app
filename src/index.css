@@ -16,12 +16,23 @@ body {
   width: 400px;
   height: 600px;
   background-color: #3f2e3e;
-  border-radius: 10px;
+  border-radius: 10px 10px;
+  border-style: solid;
+  border-color: #efe1d1;
+  border-width: 1px;
+  border-top-right-radius: 10px;
+  border-top-left-radius: 10px;
 }
 
 .timer {
+  margin-top: 20px;
+  margin-bottom: 20px;
   display: flex;
   justify-content: center;
   align-items: center;
   height: 60px;
+}
+
+.timingsHeader {
+  width: 400px;
 }
