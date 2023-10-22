@@ -1,14 +1,13 @@
-import express from "express";
-import d2gsi from "dota2-gsi";
+const express = require("express");
+var d2gsi = require("dota2-gsi");
 
-let options = {
+var server = new d2gsi({
   port: 3002,
-};
-var server = new d2gsi([options]);
+});
 
 const app = express();
 const port = 3001;
-let timer;
+let timer = null;
 
 server.events.on("newclient", function (client) {
   console.log("New client connection, IP address: " + client.ip);
@@ -23,8 +22,8 @@ server.events.on("newclient", function (client) {
   });
 });
 
-app.get("/", (req, res) => {
-  res.send(`${timer}`);
+app.get("/dotaapi", (req, res) => {
+  res.json({ time: timer });
 });
 
 app.listen(port, () => {
