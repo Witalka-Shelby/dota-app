@@ -8,7 +8,7 @@ var server = new d2gsi([options]);
 
 const app = express();
 const port = 3001;
-let timer = 420;
+let timer;
 
 server.events.on("newclient", function (client) {
   console.log("New client connection, IP address: " + client.ip);
