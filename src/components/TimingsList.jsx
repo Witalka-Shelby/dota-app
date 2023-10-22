@@ -5,7 +5,11 @@ import Item from "./Item";
 import Collapse from "@mui/material/Collapse";
 import runeTimes from "../runeTimes";
 
-export default function SwitchListSecondary({ expandCard, toggleCard }) {
+export default function SwitchListSecondary({
+  expandCard,
+  handleClick,
+  runes,
+}) {
   return (
     <List
       key={"runeTimingsList"}
@@ -14,6 +18,7 @@ export default function SwitchListSecondary({ expandCard, toggleCard }) {
       subheader={
         <ListSubheader
           className="timingsHeader"
+          id={"timingsToggle"}
           style={{
             backgroundColor: "#A78295",
             borderBottomLeftRadius: !expandCard ? "9px" : "0px",
@@ -21,11 +26,11 @@ export default function SwitchListSecondary({ expandCard, toggleCard }) {
           }}
           key={"runeTimingsListHeader"}
           onClick={(event) => {
-            toggleCard(event);
+            handleClick(event);
           }}
           color="inherit"
         >
-          {expandCard ? "Timings" : "Open Timings"}
+          {expandCard ? "Timings" : "Show Timings"}
         </ListSubheader>
       }
     >
@@ -34,12 +39,14 @@ export default function SwitchListSecondary({ expandCard, toggleCard }) {
           return (
             <div>
               <Item
+                className={rune.name}
                 key={index}
-                id={index}
+                id={rune.name}
+                runes={runes}
                 runeName={rune.name}
                 runeText={rune.text}
                 runeTime={rune.time}
-                toggleRune={toggleCard}
+                handleClick={handleClick}
               />
             </div>
           );

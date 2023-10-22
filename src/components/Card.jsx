@@ -5,9 +5,10 @@ import RuneAlert from "./RuneAlert";
 export default function Card({
   expand,
   handleClick,
-  rune,
+  msgActive,
   runeMessage,
   count,
+  runes,
 }) {
   return (
     <div
@@ -17,8 +18,12 @@ export default function Card({
       }}
     >
       <Timer time={count} />
-      <TimingsList toggleCard={handleClick} expandCard={expand} />
-      <RuneAlert runeTrigger={rune} text={runeMessage} />
+      <TimingsList
+        handleClick={handleClick}
+        expandCard={expand}
+        runes={runes}
+      />
+      <RuneAlert runeTrigger={msgActive} text={runeMessage} />
     </div>
   );
 }

@@ -7,16 +7,18 @@ import Card from "./components/Card";
 function App() {
   const [expand, setExpand] = useState(false);
   const [count, setCount] = useState(0);
-  const [rune, setRune] = useState(false);
+  const [msgActive, setMsgActive] = useState(false);
   let [runeMessage, setRuneMessage] = useState("");
   const [pause, setPause] = useState(false);
 
   // Runes
-  const [bounty, setBounty] = useState(true);
-  const [power, setPower] = useState(true);
-  const [wisdom, setWisdom] = useState(true);
-  const [day, setDay] = useState(true);
-  const [tormentor, setTormentor] = useState(true);
+  const [runes, setRunes] = useState({
+    bounty: true,
+    power: true,
+    wisdom: true,
+    day: true,
+    tormentor: true,
+  });
 
   useEffect(() => {
     //Implementing the setInterval method
@@ -24,19 +26,19 @@ function App() {
       let message = "";
 
       // Bounty 3 min
-      if (bounty) {
+      if (runes.bounty) {
         if (count % 180 === 0) {
           message += "Bounty \n";
           if (count >= 60) {
             message += "Lotus \n";
           }
-          setRune(true);
-          setTimeout(() => setRune(false), 5000);
+          setMsgActive(true);
+          setTimeout(() => setMsgActive(false), 5000);
         }
       }
 
       // Power 2 min
-      if (power) {
+      if (runes.power) {
         if (count % 120 === 0) {
           if (count > 60) {
             if (count < 300) {
@@ -44,36 +46,36 @@ function App() {
             } else {
               message += "Power \n";
             }
-            setRune(true);
-            setTimeout(() => setRune(false), 5000);
+            setMsgActive(true);
+            setTimeout(() => setMsgActive(false), 5000);
           }
         }
       }
 
       // Wisdom 7 min
-      if (wisdom) {
+      if (runes.wisdom) {
         if (count % 420 === 0) {
           message += "Wisdom \n";
-          setRune(true);
-          setTimeout(() => setRune(false), 5000);
+          setMsgActive(true);
+          setTimeout(() => setMsgActive(false), 5000);
         }
       }
 
       // Day/Night 5 min
-      if (wisdom) {
+      if (runes.day) {
         if (count % 300 === 0) {
           message += "Day / Night \n";
-          setRune(true);
-          setTimeout(() => setRune(false), 5000);
+          setMsgActive(true);
+          setTimeout(() => setMsgActive(false), 5000);
         }
       }
 
       // Tormentor 20 min
-      if (wisdom) {
+      if (runes.tormentor) {
         if (count % 1200 === 0) {
           message += "Tormentor \n";
-          setRune(true);
-          setTimeout(() => setRune(false), 5000);
+          setMsgActive(true);
+          setTimeout(() => setMsgActive(false), 5000);
         }
       }
 
@@ -88,51 +90,29 @@ function App() {
 
     //Clearing the interval
     return () => clearInterval(interval);
-  }, [count, rune]);
+  }, [count, msgActive]);
 
   // Handle clicks
   function handleClick(event) {
-    console.log(event);
+    const { id, name, checked } = event.target;
+    //console.log(name, value);
+    console.log(checked);
 
-    if (event === "test") {
+    if (id === "test") {
       setPause((prevVal) => {
         console.log(prevVal);
         return !prevVal;
       });
     }
-    if (event === "expand") {
+    if (id === "timingsToggle") {
       setExpand((prevState) => {
         return !prevState;
       });
     }
 
-    if (event === "bounty") {
-      setBounty((prevState) => {
-        return !prevState;
-      });
-    }
-
-    if (event === "power") {
-      setPower((prevState) => {
-        return !prevState;
-      });
-    }
-
-    if (event === "wisdom") {
-      setWisdom((prevState) => {
-        return !prevState;
-      });
-    }
-
-    if (event === "day") {
-      setDay((prevState) => {
-        return !prevState;
-      });
-    }
-
-    if (event === "tormentor") {
-      setTormentor((prevState) => {
-        return !prevState;
+    if (id === "runeToggle") {
+      setRunes((prevVal) => {
+        return { ...prevVal, [name]: checked };
       });
     }
   }
@@ -140,11 +120,14 @@ function App() {
   return (
     <div className="App">
       <h1 className="title">Dota 2 Timer</h1>
-      <Button onClick={() => handleClick("test")}>pause</Button>
+      <Button id="test" onClick={(event) => handleClick(event)}>
+        pause
+      </Button>
       <Card
         expand={expand}
         handleClick={handleClick}
-        rune={rune}
+        msgActive={msgActive}
+        runes={runes}
         runeMessage={runeMessage}
         count={count}
       />
