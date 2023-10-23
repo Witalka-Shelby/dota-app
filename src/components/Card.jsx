@@ -23,7 +23,7 @@ export default function Card({
         expandCard={expand}
         runes={runes}
       />
-      <RuneAlert runeTrigger={msgActive} text={runeMessage} />
+      <RuneAlert runeTrigger={msgActive} textObj={runeMessage} />
     </div>
   );
 }

@@ -6,11 +6,17 @@ import Card from "./components/Card";
 
 function App() {
   const [expand, setExpand] = useState(false);
-  const [count, setCount] = useState(0);
+  const [count, setCount] = useState(-20);
   const [msgActive, setMsgActive] = useState(false);
-  let [runeMessage, setRuneMessage] = useState("");
-  const [pause, setPause] = useState(false);
   const [remind, setRemind] = useState(15);
+  const [runeMessage, setRuneMessage] = useState({
+    title: `In ${remind} seconds`,
+    message: "",
+    dayAndRosh: "Day and Rosh is Bot",
+  });
+  const [pause, setPause] = useState(false);
+
+  const [timeOfDay, setTimeOfDay] = useState(true);
 
   // Runes
   const [runes, setRunes] = useState({
@@ -72,13 +78,25 @@ function App() {
 
       // Day/Night 5 min
       if (runes.day) {
-        if ((count + remind) % 300 === 0 && count > 60) {
-          message += "Day / Rosh South \n";
-          setMsgActive(true);
-          setTimeout(() => setMsgActive(false), 5000);
+        if (timeOfDay) {
+          if ((count + remind) % 300 === 0 && count > 60) {
+            setRuneMessage((prevMsg) => {
+              return { ...prevMsg, dayAndRosh: "Night and Rosh is Top" };
+            });
+            setTimeOfDay(false);
+            setMsgActive(true);
+            setTimeout(() => setMsgActive(false), 5000);
+          }
+        } else {
+          if ((count + remind) % 300 === 0 && count > 60) {
+            setRuneMessage((prevMsg) => {
+              return { ...prevMsg, dayAndRosh: "Day and Rosh is Bot" };
+            });
+            setTimeOfDay(true);
+            setMsgActive(true);
+            setTimeout(() => setMsgActive(false), 5000);
+          }
         }
-      } else {
-        message += "Day / Rosh South \n";
       }
 
       // Tormentor 20 min
@@ -91,13 +109,15 @@ function App() {
       }
 
       if (message !== "") {
-        setRuneMessage(message);
+        setRuneMessage((prevMsg) => {
+          return { ...prevMsg, message: message };
+        });
       }
 
       if (!pause) {
         setCount(count + 1);
       }
-    }, 250);
+    }, 120);
 
     //Clearing the interval
     return () => clearInterval(interval);

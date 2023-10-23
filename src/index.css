@@ -40,3 +40,7 @@ body {
 .runeTimeText > p {
   color: #efe1d1;
 }
+
+.timerDialog {
+  width: 300px;
+}
