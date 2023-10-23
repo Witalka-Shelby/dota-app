@@ -36,7 +36,7 @@ function App() {
 
       // Bounty 3 min
       if (runes.bounty) {
-        if (count % (180 - remind) === 0) {
+        if ((count + 15) % 180 === 0) {
           message += "Bounty \n";
           if (count >= 60) {
             message += "Lotus \n";
@@ -48,7 +48,7 @@ function App() {
 
       // Power 2 min
       if (runes.power) {
-        if (count % (120 - remind) === 0 && count > 60) {
+        if ((count + 15) % 120 === 0 && count > 60) {
           if (count > 60) {
             if (count < 300) {
               message += "Water \n";
@@ -63,7 +63,7 @@ function App() {
 
       // Wisdom 7 min
       if (runes.wisdom) {
-        if (count % (420 - remind) === 0 && count > 60) {
+        if ((count + 15) % 420 === 0 && count > 60) {
           message += "Wisdom \n";
           setMsgActive(true);
           setTimeout(() => setMsgActive(false), 5000);
@@ -72,7 +72,7 @@ function App() {
 
       // Day/Night 5 min
       if (runes.day) {
-        if (count % (300 - remind) === 0 && count > 60) {
+        if ((count + 15) % 300 === 0 && count > 60) {
           message += "Day / Rosh South \n";
           setMsgActive(true);
           setTimeout(() => setMsgActive(false), 5000);
@@ -83,7 +83,7 @@ function App() {
 
       // Tormentor 20 min
       if (runes.tormentor) {
-        if (count % (1200 - remind) === 0 && count > 60) {
+        if ((count + 15) % 1200 === 0 && count > 60) {
           message += "Tormentor \n";
           setMsgActive(true);
           setTimeout(() => setMsgActive(false), 5000);
