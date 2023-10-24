@@ -34,7 +34,7 @@ export default function SwitchListSecondary({
         </ListSubheader>
       }
     >
-      <Collapse key={"runeTimingsListCollapse"} timeout="auto" in={expandCard}>
+      <Collapse key={"runeTimingsListCollapse"} timeout={0} in={expandCard}>
         {runeTimes.map((rune, index) => {
           return (
             <div>
