@@ -21,11 +21,7 @@ function Timer({ time }) {
     });
   }, [min, sec, time]);
 
-  return (
-    <h2 className="timer">
-      {min}:{sec}
-    </h2>
-  );
+  return <h2 className="timer">{time < 0 ? time : `${min}:${sec}`}</h2>;
 }
 
 export default Timer;

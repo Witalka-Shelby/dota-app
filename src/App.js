@@ -27,15 +27,13 @@ function App() {
     tormentor: true,
   });
 
-  async function getAPITime() {
-    const response = await fetch("/dotaapi");
-    const api = await response.json();
-    return api.time;
-  }
-
   useEffect(() => {
     //Implementing the setInterval method
-    // let vitaTEST = getAPITime().then((data) => setCount(data));
+    const fetchData = async () => {
+      const response = await fetch("/dotaapi");
+      const api = await response.json();
+      setCount(api.time);
+    };
 
     const interval = setInterval(() => {
       let message = "";
@@ -114,10 +112,15 @@ function App() {
         });
       }
 
-      if (!pause) {
-        setCount(count + 1);
-      }
-    }, 120);
+      // call the function
+      fetchData()
+        // make sure to catch any error
+        .catch(console.error);
+
+      // if (!pause) {
+      //   setCount(count + 1);
+      // }
+    }, 1000);
 
     //Clearing the interval
     return () => clearInterval(interval);
