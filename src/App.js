@@ -1,7 +1,6 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import logo from "./logo.svg";
 import "./App.css";
-import Button from "@mui/material/Button";
 import Card from "./components/Card";
 import Header from "./components/Header";
 
@@ -16,8 +15,10 @@ function App() {
     dayAndRosh: "Day and Rosh is Bot",
   });
   const [pause, setPause] = useState(false);
-
+  const [neutralsCount, setNeutralsCount] = useState(0);
   const [timeOfDay, setTimeOfDay] = useState(true);
+
+  const neutralsTimeList = useRef([420, 1020, 1620, 2200, 3600]);
 
   // Runes
   const [runes, setRunes] = useState({
@@ -31,11 +32,11 @@ function App() {
 
   useEffect(() => {
     //Implementing the setInterval method
-    const fetchData = async () => {
-      const response = await fetch("/dotaapi");
-      const api = await response.json();
-      setCount(api.time);
-    };
+    // const fetchData = async () => {
+    //   const response = await fetch("/dotaapi");
+    //   const api = await response.json();
+    //   setCount(api.time);
+    // };
 
     const interval = setInterval(() => {
       let message = "";
@@ -78,24 +79,17 @@ function App() {
 
       // Day/Night 5 min
       if (runes.day) {
-        if (timeOfDay) {
-          if ((count + remind) % 300 === 0 && count > 60) {
-            setRuneMessage((prevMsg) => {
-              return { ...prevMsg, dayAndRosh: "Night and Rosh is Top" };
-            });
-            setTimeOfDay(false);
-            setMsgActive(true);
-            setTimeout(() => setMsgActive(false), 5000);
+        if ((count + remind) % 300 === 0 && count > 60) {
+          let tempDayNightMsg = "Night and Rosh is Top";
+          if (!timeOfDay) {
+            tempDayNightMsg = "Day and Rosh is Bot";
           }
-        } else {
-          if ((count + remind) % 300 === 0 && count > 60) {
-            setRuneMessage((prevMsg) => {
-              return { ...prevMsg, dayAndRosh: "Day and Rosh is Bot" };
-            });
-            setTimeOfDay(true);
-            setMsgActive(true);
-            setTimeout(() => setMsgActive(false), 5000);
-          }
+          setRuneMessage((prevMsg) => {
+            return { ...prevMsg, dayAndRosh: tempDayNightMsg };
+          });
+          setTimeOfDay(false);
+          setMsgActive(true);
+          setTimeout(() => setMsgActive(false), 5000);
         }
       }
 
@@ -109,9 +103,13 @@ function App() {
       }
 
       if (runes.neutrals) {
-        if ((count + remind) % 420 === 0 && count > 60) {
-          message += "Neutrals \n";
+        if (
+          (count + remind) % neutralsTimeList.current[neutralsCount] === 0 &&
+          count > 60
+        ) {
+          message += `Neutrals Tier ${neutralsCount + 1} \n`;
           setMsgActive(true);
+          setNeutralsCount(neutralsCount + 1);
           setTimeout(() => setMsgActive(false), 5000);
         }
       }
@@ -127,9 +125,9 @@ function App() {
       //   // make sure to catch any error
       //   .catch(console.error);
 
-      // if (!pause) {
-      //   setCount(count + 1);
-      // }
+      if (!pause) {
+        setCount(count + 1);
+      }
     }, 1000);
 
     //Clearing the interval
@@ -139,12 +137,11 @@ function App() {
   // Handle clicks
   function handleClick(event) {
     const { id, name, checked } = event.target;
-    //console.log(name, value);
-    console.log(checked);
+    // console.log(event);
 
     if (id === "test") {
       setPause((prevVal) => {
-        console.log(prevVal);
+        // console.log(prevVal);
         return !prevVal;
       });
     }
@@ -155,6 +152,7 @@ function App() {
     }
 
     if (id === "runeToggle") {
+      // console.log(name, checked);
       setRunes((prevVal) => {
         return { ...prevVal, [name]: checked };
       });
@@ -163,11 +161,16 @@ function App() {
 
   return (
     <div className="App">
-      <Header reminderSeconds={remind} changeReminder={setRemind} />
+      <Header
+        key={"header"}
+        reminderSeconds={remind}
+        changeReminder={setRemind}
+      />
       {/* <Button id="test" onClick={(event) => handleClick(event)}>
         pause
       </Button> */}
       <Card
+        key={"mainCard"}
         remind={remind}
         expand={expand}
         handleClick={handleClick}

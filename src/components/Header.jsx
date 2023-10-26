@@ -34,20 +34,18 @@ export default function Header({ reminderSeconds, changeReminder }) {
 
   return (
     <Container className="timerContainer">
-      <Box>
+      <Box key={"headerTitle"}>
         <h1 className="title">Dota 2 Timer</h1>
       </Box>
       <Box>
         <SettingsApplicationsIcon
+          key={"settingsIcon"}
           id={"settings"}
           className="settingsIcon"
           onClick={handleClick}
         ></SettingsApplicationsIcon>
         <Popover
-          sx={{
-            border: "1px",
-            borderColor: "#331D2C",
-          }}
+          key={"popover"}
           open={openPopover}
           onClose={handleClose}
           anchorEl={anchorEl}
@@ -57,27 +55,32 @@ export default function Header({ reminderSeconds, changeReminder }) {
           }}
         >
           <Box
+            key={"reminderTime"}
             sx={{
+              padding: "5px",
               display: "flex",
               justifyContent: "center",
               backgroundColor: "#efe1d1",
-              width: "300px",
+              width: "200px",
             }}
           >
             Reminder time
           </Box>
           <ButtonGroup
+            key={"buttonGroupe"}
             sx={{
+              padding: "5px",
               display: "flex",
               justifyContent: "center",
               backgroundColor: "#efe1d1",
-              width: "300px",
+              width: "200px",
             }}
             className="popover"
             variant="text"
             aria-label="text button group"
           >
             <Button
+              key={"minusBtn"}
               sx={{
                 color: "#331D2C",
               }}
@@ -87,6 +90,7 @@ export default function Header({ reminderSeconds, changeReminder }) {
               -
             </Button>
             <Button
+              key={"timeBtn"}
               sx={{
                 color: "#331D2C",
               }}
@@ -94,6 +98,7 @@ export default function Header({ reminderSeconds, changeReminder }) {
               {reminderSeconds}
             </Button>
             <Button
+              key={"plusBtn"}
               sx={{
                 color: "#331D2C",
               }}

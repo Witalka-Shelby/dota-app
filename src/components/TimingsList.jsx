@@ -9,6 +9,7 @@ export default function SwitchListSecondary({
   expandCard,
   handleClick,
   runes,
+  time,
 }) {
   return (
     <List
@@ -17,6 +18,7 @@ export default function SwitchListSecondary({
       sx={{ width: "100%", maxWidth: "100%" }}
       subheader={
         <ListSubheader
+          key={"runeTimingsListHeader"}
           className="timingsHeader"
           id={"timingsToggle"}
           style={{
@@ -24,7 +26,6 @@ export default function SwitchListSecondary({
             borderBottomLeftRadius: !expandCard ? "9px" : "0px",
             borderBottomRightRadius: !expandCard ? "9px" : "0px",
           }}
-          key={"runeTimingsListHeader"}
           onClick={(event) => {
             handleClick(event);
           }}
@@ -39,6 +40,7 @@ export default function SwitchListSecondary({
           return (
             <div>
               <Item
+                time={time}
                 className={rune.name}
                 key={index}
                 id={rune.name}

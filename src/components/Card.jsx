@@ -16,6 +16,7 @@ export default function Card({
     <div>
       <Box
         className="card"
+        key={"card"}
         sx={{
           boxShadow: 3,
           width: "400px",
@@ -28,6 +29,7 @@ export default function Card({
       >
         <Timer time={count} />
         <TimingsList
+          time={count}
           handleClick={handleClick}
           expandCard={expand}
           runes={runes}
