@@ -3,7 +3,6 @@ import Dialog from "@mui/material/Dialog";
 import DialogTitle from "@mui/material/DialogTitle";
 import DialogContent from "@mui/material/DialogContent";
 import DialogContentText from "@mui/material/DialogContentText";
-import Typography from "@mui/material/Typography";
 
 export default function AlertDialogSlide(props) {
   // console.log(props.textObj);
@@ -17,10 +16,8 @@ export default function AlertDialogSlide(props) {
       >
         <DialogContent className="timerDialog">
           <DialogTitle>In {props.remind} seconds</DialogTitle>
-          <DialogContentText>
-            <Typography paragraph>{props.textObj.message}</Typography>
-            <Typography paragraph>{props.textObj.dayAndRosh}</Typography>
-          </DialogContentText>
+          <DialogContentText>{props.textObj.message}</DialogContentText>
+          <DialogContentText>{props.textObj.dayAndRosh}</DialogContentText>
         </DialogContent>
       </Dialog>
     </div>

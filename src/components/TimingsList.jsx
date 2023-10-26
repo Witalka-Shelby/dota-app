@@ -31,13 +31,13 @@ export default function TimingsList({ expandCard, handleClick, runes, time }) {
       }
     >
       <Collapse key={"runeTimingsListCollapse"} timeout={0} in={expandCard}>
-        {runeTimes.map((rune) => {
+        {runeTimes.map((rune, index) => {
           return (
-            <div>
+            <div key={index}>
               <Item
                 time={time}
                 className={rune.name}
-                key={rune.name}
+                key={rune.name + index}
                 id={rune.name}
                 runes={runes}
                 runeName={rune.name}

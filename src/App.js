@@ -137,7 +137,7 @@ function App() {
   // Handle clicks
   function handleClick(event) {
     const { id, name, checked, type } = event.target;
-    console.log(type);
+    // console.log(type);
 
     if (id === "test") {
       setPause((prevVal) => {
