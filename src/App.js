@@ -3,6 +3,7 @@ import logo from "./logo.svg";
 import "./App.css";
 import Button from "@mui/material/Button";
 import Card from "./components/Card";
+import Header from "./components/Header";
 
 function App() {
   const [expand, setExpand] = useState(false);
@@ -29,11 +30,11 @@ function App() {
 
   useEffect(() => {
     //Implementing the setInterval method
-    const fetchData = async () => {
-      const response = await fetch("/dotaapi");
-      const api = await response.json();
-      setCount(api.time);
-    };
+    // const fetchData = async () => {
+    //   const response = await fetch("/dotaapi");
+    //   const api = await response.json();
+    //   setCount(api.time);
+    // };
 
     const interval = setInterval(() => {
       let message = "";
@@ -112,15 +113,15 @@ function App() {
         });
       }
 
-      // call the function
-      fetchData()
-        // make sure to catch any error
-        .catch(console.error);
+      // // call the function
+      // fetchData()
+      //   // make sure to catch any error
+      //   .catch(console.error);
 
-      // if (!pause) {
-      //   setCount(count + 1);
-      // }
-    }, 1000);
+      if (!pause) {
+        setCount(count + 1);
+      }
+    }, 100);
 
     //Clearing the interval
     return () => clearInterval(interval);
@@ -153,7 +154,7 @@ function App() {
 
   return (
     <div className="App">
-      <h1 className="title">Dota 2 Timer</h1>
+      <Header reminderSeconds={remind} changeReminder={setRemind} />
       <Button id="test" onClick={(event) => handleClick(event)}>
         pause
       </Button>

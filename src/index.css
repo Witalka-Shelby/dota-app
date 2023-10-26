@@ -44,3 +44,14 @@ body {
 .timerDialog {
   width: 300px;
 }
+
+.timerContainer {
+  position: relative;
+}
+
+.settingsIcon {
+  position: absolute;
+  top: 0px;
+  right: 0px;
+  font-size: x-large;
+}
