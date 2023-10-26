@@ -7,7 +7,7 @@ import { ThemeProvider } from "@mui/material/styles";
 import { theme } from "./switchStyle";
 import Avatar from "@mui/material/Avatar";
 
-function Item({ handleClick, runeName, runeTime, runeText, id, runes, time }) {
+function Item({ handleClick, runeName, runeTime, runeText, id, runes }) {
   const [toggle, setToggle] = useState(runes[runeName]);
 
   function Toggle(event) {
@@ -29,7 +29,7 @@ function Item({ handleClick, runeName, runeTime, runeText, id, runes, time }) {
       <ThemeProvider theme={theme}>
         <Switch
           key={id}
-          id={"runeToggle"}
+          id={runeName}
           name={id}
           value={toggle}
           color="dota"

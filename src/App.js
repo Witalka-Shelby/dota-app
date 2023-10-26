@@ -136,8 +136,8 @@ function App() {
 
   // Handle clicks
   function handleClick(event) {
-    const { id, name, checked } = event.target;
-    // console.log(event);
+    const { id, name, checked, type } = event.target;
+    console.log(type);
 
     if (id === "test") {
       setPause((prevVal) => {
@@ -151,7 +151,7 @@ function App() {
       });
     }
 
-    if (id === "runeToggle") {
+    if (type === "checkbox") {
       // console.log(name, checked);
       setRunes((prevVal) => {
         return { ...prevVal, [name]: checked };

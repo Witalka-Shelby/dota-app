@@ -5,12 +5,7 @@ import Item from "./Item";
 import Collapse from "@mui/material/Collapse";
 import runeTimes from "../runeTimes";
 
-export default function SwitchListSecondary({
-  expandCard,
-  handleClick,
-  runes,
-  time,
-}) {
+export default function TimingsList({ expandCard, handleClick, runes, time }) {
   return (
     <List
       key={"runeTimingsList"}
@@ -36,13 +31,13 @@ export default function SwitchListSecondary({
       }
     >
       <Collapse key={"runeTimingsListCollapse"} timeout={0} in={expandCard}>
-        {runeTimes.map((rune, index) => {
+        {runeTimes.map((rune) => {
           return (
             <div>
               <Item
                 time={time}
                 className={rune.name}
-                key={index}
+                key={rune.name}
                 id={rune.name}
                 runes={runes}
                 runeName={rune.name}
