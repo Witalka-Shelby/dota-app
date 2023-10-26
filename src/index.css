@@ -9,7 +9,7 @@ body {
   align-items: center;
   height: calc(100vh - 100px);
   padding: 1rem;
-  font-family: "Architects Daughter", cursive;
+  font-family: "Times New Roman", serif;
 }
 
 .card {

@@ -16,7 +16,7 @@ export default function AlertDialogSlide(props) {
         aria-describedby="alert-dialog-description"
       >
         <DialogContent className="timerDialog">
-          <DialogTitle>{props.textObj.title}</DialogTitle>
+          <DialogTitle>In {props.remind} seconds</DialogTitle>
           <DialogContentText>
             <Typography paragraph>{props.textObj.message}</Typography>
             <Typography paragraph>{props.textObj.dayAndRosh}</Typography>

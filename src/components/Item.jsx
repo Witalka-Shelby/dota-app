@@ -5,6 +5,8 @@ import ListItemText from "@mui/material/ListItemText";
 import Switch from "@mui/material/Switch";
 import { ThemeProvider } from "@mui/material/styles";
 import { theme } from "./switchStyle";
+import Avatar from "@mui/material/Avatar";
+import Brightness4Icon from "@mui/icons-material/Brightness4";
 
 function Item({ handleClick, runeName, runeTime, runeText, id, runes }) {
   const [toggle, setToggle] = useState(runes[runeName]);
@@ -15,7 +17,7 @@ function Item({ handleClick, runeName, runeTime, runeText, id, runes }) {
   return (
     <ListItem>
       <ListItemIcon>
-        <h3>Icon</h3>
+        <Avatar alt={`${runeName}`} src={`${runeName}.png`} />
       </ListItemIcon>
       <ListItemText
         className="runeTimeText"

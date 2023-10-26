@@ -26,15 +26,16 @@ function App() {
     wisdom: true,
     day: true,
     tormentor: true,
+    neutrals: true,
   });
 
   useEffect(() => {
     //Implementing the setInterval method
-    // const fetchData = async () => {
-    //   const response = await fetch("/dotaapi");
-    //   const api = await response.json();
-    //   setCount(api.time);
-    // };
+    const fetchData = async () => {
+      const response = await fetch("/dotaapi");
+      const api = await response.json();
+      setCount(api.time);
+    };
 
     const interval = setInterval(() => {
       let message = "";
@@ -107,6 +108,14 @@ function App() {
         }
       }
 
+      if (runes.neutrals) {
+        if ((count + remind) % 420 === 0 && count > 60) {
+          message += "Neutrals \n";
+          setMsgActive(true);
+          setTimeout(() => setMsgActive(false), 5000);
+        }
+      }
+
       if (message !== "") {
         setRuneMessage((prevMsg) => {
           return { ...prevMsg, message: message };
@@ -118,10 +127,10 @@ function App() {
       //   // make sure to catch any error
       //   .catch(console.error);
 
-      if (!pause) {
-        setCount(count + 1);
-      }
-    }, 100);
+      // if (!pause) {
+      //   setCount(count + 1);
+      // }
+    }, 1000);
 
     //Clearing the interval
     return () => clearInterval(interval);
@@ -155,10 +164,11 @@ function App() {
   return (
     <div className="App">
       <Header reminderSeconds={remind} changeReminder={setRemind} />
-      <Button id="test" onClick={(event) => handleClick(event)}>
+      {/* <Button id="test" onClick={(event) => handleClick(event)}>
         pause
-      </Button>
+      </Button> */}
       <Card
+        remind={remind}
         expand={expand}
         handleClick={handleClick}
         msgActive={msgActive}

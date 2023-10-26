@@ -10,6 +10,7 @@ export default function Card({
   runeMessage,
   count,
   runes,
+  remind,
 }) {
   return (
     <div>
@@ -33,7 +34,11 @@ export default function Card({
         />
       </Box>
 
-      <RuneAlert runeTrigger={msgActive} textObj={runeMessage} />
+      <RuneAlert
+        remind={remind}
+        runeTrigger={msgActive}
+        textObj={runeMessage}
+      />
     </div>
   );
 }

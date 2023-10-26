@@ -24,6 +24,11 @@ const runeTimes = [
     time: 20,
     text: "Tormentor",
   },
+  {
+    name: "neutrals",
+    time: "7 / 17 / 27 / 36:40 / 60",
+    text: "Neutrals",
+  },
 ];
 
 export default runeTimes;
