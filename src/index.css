@@ -33,6 +33,10 @@ body {
   height: 60px;
 }
 
+.rosh {
+  position: absolute;
+}
+
 .timingsHeader {
   width: 400px;
 }
@@ -53,5 +57,14 @@ body {
   position: absolute;
   top: 0px;
   right: 0px;
-  font-size: x-large;
+}
+
+.timerBox {
+  position: relative;
+}
+
+.rosh {
+  position: absolute;
+  top: 0px;
+  right: 20px;
 }

@@ -39,6 +39,9 @@ export default function Header({ reminderSeconds, changeReminder }) {
       </Box>
       <Box>
         <SettingsApplicationsIcon
+          sx={{
+            fontSize: "30px",
+          }}
           key={"settingsIcon"}
           id={"settings"}
           className="settingsIcon"
