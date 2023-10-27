@@ -1,6 +1,5 @@
 import React from "react";
 import { Box, Container } from "@mui/system";
-import SettingsApplicationsIcon from "@mui/icons-material/SettingsApplications";
 import Popover from "@mui/material/Popover";
 import Button from "@mui/material/Button";
 import ButtonGroup from "@mui/material/ButtonGroup";
@@ -10,9 +9,8 @@ export default function Header({ reminderSeconds, changeReminder }) {
   const [anchorEl, setAnchorEl] = React.useState(null);
 
   const handleClick = (event) => {
-    console.log(event);
     let { id } = event.target;
-    console.log(id);
+    // console.log(id);
     if (id === "plus") {
       changeReminder(reminderSeconds + 1);
     }
@@ -37,16 +35,15 @@ export default function Header({ reminderSeconds, changeReminder }) {
       <Box key={"headerTitle"}>
         <h1 className="title">Dota 2 Timer</h1>
       </Box>
-      <Box>
-        <SettingsApplicationsIcon
-          sx={{
-            fontSize: "30px",
-          }}
+      <Box onClick={handleClick}>
+        <img
+          height={30}
           key={"settingsIcon"}
           id={"settings"}
           className="settingsIcon"
-          onClick={handleClick}
-        ></SettingsApplicationsIcon>
+          src="settings.png"
+          alt="settings"
+        />
         <Popover
           key={"popover"}
           open={openPopover}
@@ -57,6 +54,17 @@ export default function Header({ reminderSeconds, changeReminder }) {
             horizontal: "right",
           }}
         >
+          <Box
+            sx={{
+              padding: "5px",
+              display: "flex",
+              justifyContent: "center",
+              backgroundColor: "#efe1d1",
+              width: "200px",
+            }}
+          >
+            <p>Click on Rosh to start timer.</p>
+          </Box>
           <Box
             key={"reminderTime"}
             sx={{

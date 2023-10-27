@@ -1,27 +1,43 @@
 import { useState, useEffect } from "react";
 import { Box } from "@mui/system";
 import Popover from "@mui/material/Popover";
-import { eventWrapper } from "@testing-library/user-event/dist/utils";
 
 function Timer({ time }) {
   const [min, setMin] = useState(0);
   const [sec, setSec] = useState(0);
   const [anchorEl, setAnchorEl] = useState(null);
   const [openPopover, setOpenPopover] = useState(false);
+  const [roshInfo, setRoshInfo] = useState();
 
   function roshTimer(event) {
+    console.log(event);
+    setAnchorEl(event.currentTarget);
     setTimeout(() => {
-      // alert("rosh 8 min");
-    }, 5000);
+      setRoshInfo("8 min since Rosh kill he spawns soon");
+      setOpenPopover(true);
+
+      setTimeout(() => {
+        setOpenPopover(false);
+      }, 10000);
+    }, 480000);
 
     setTimeout(() => {
-      // alert("rosh 11 min");
-    }, 10000);
+      setRoshInfo("11 min since Rosh kill he spawned");
+      setOpenPopover(true);
+
+      setTimeout(() => {
+        setOpenPopover(false);
+      }, 10000);
+    }, 660000);
   }
 
   function roshText(event) {
+    setRoshInfo("Click Rosh to set the respawn timer.");
     setAnchorEl(event.currentTarget);
     setOpenPopover(true);
+    setTimeout(() => {
+      setOpenPopover(false);
+    }, 3000);
   }
 
   const handleClose = (event) => {
@@ -48,20 +64,24 @@ function Timer({ time }) {
 
   return (
     <Box className="timerBox">
-      <h2 className="timer">{time < 0 ? time : `${min}:${sec}`}</h2>
-      <img
-        onMouseOver={roshText}
-        onClick={roshTimer}
-        id="roshBtn"
-        className="rosh"
-        height={60}
-        src="rosh.png"
-        alt="rosh"
-      ></img>
+      <Box>
+        <h2 className="timer">{time < 0 ? time : `${min}:${sec}`}</h2>
+      </Box>
+      <Box>
+        <img
+          onClick={roshTimer}
+          id="roshBtn"
+          className="rosh"
+          height={60}
+          src="rosh.png"
+          alt="rosh"
+        ></img>
+      </Box>
+
       <Popover
         key={"popover"}
         open={openPopover}
-        onClose={handleClose}
+        onMouseOut={handleClose}
         anchorEl={anchorEl}
         anchorOrigin={{
           vertical: "bottom",
@@ -78,7 +98,7 @@ function Timer({ time }) {
             width: "200px",
           }}
         >
-          Click Rosh to set the respawn timer.
+          {roshInfo}
         </Box>
       </Popover>
     </Box>
