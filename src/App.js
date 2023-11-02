@@ -31,12 +31,15 @@ function App() {
   });
 
   useEffect(() => {
+    document.title = "Dota 2 Timer";
+
     //Implementing the setInterval method
-    const fetchData = async () => {
-      const response = await fetch("dotaapi");
-      const api = await response.json();
-      setCount(api.time);
-    };
+    // uncomment to sync with api
+    // const fetchData = async () => {
+    //   const response = await fetch("dotaapi");
+    //   const api = await response.json();
+    //   setCount(api.time);
+    // };
 
     const interval = setInterval(() => {
       let message = [];
@@ -121,14 +124,15 @@ function App() {
       }
 
       // call the function
-      fetchData()
-        // make sure to catch any error
-        .catch(console.error);
+      // uncomment to start sync
+      // fetchData()
+      //   // make sure to catch any error
+      //   .catch(console.error);
 
-      // if (!pause) {
-      //   setCount(count + 1);
-      // }
-    }, 200);
+      if (!pause) {
+        setCount(count + 1);
+      }
+    }, 500);
 
     //Clearing the interval
     return () => clearInterval(interval);
