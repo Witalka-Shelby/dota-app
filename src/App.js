@@ -32,11 +32,11 @@ function App() {
 
   useEffect(() => {
     //Implementing the setInterval method
-    // const fetchData = async () => {
-    //   const response = await fetch("dotaapi");
-    //   const api = await response.json();
-    //   setCount(api.time);
-    // };
+    const fetchData = async () => {
+      const response = await fetch("dotaapi");
+      const api = await response.json();
+      setCount(api.time);
+    };
 
     const interval = setInterval(() => {
       let message = [];
@@ -120,14 +120,14 @@ function App() {
         });
       }
 
-      // // call the function
-      // fetchData()
-      //   // make sure to catch any error
-      //   .catch(console.error);
+      // call the function
+      fetchData()
+        // make sure to catch any error
+        .catch(console.error);
 
-      if (!pause) {
-        setCount(count + 1);
-      }
+      // if (!pause) {
+      //   setCount(count + 1);
+      // }
     }, 200);
 
     //Clearing the interval

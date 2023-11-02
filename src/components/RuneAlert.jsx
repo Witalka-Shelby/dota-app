@@ -21,7 +21,7 @@ export default function AlertDialogSlide(props) {
                 key={msg}
                 sx={{
                   fontSize: 30,
-                  color: "331D2C",
+                  color: "#331D2C",
                 }}
               >
                 {msg}
