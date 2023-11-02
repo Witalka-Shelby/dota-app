@@ -5,7 +5,6 @@ import DialogContent from "@mui/material/DialogContent";
 import DialogContentText from "@mui/material/DialogContentText";
 
 export default function AlertDialogSlide(props) {
-  // console.log(props.textObj);
   return (
     <div>
       <Dialog
@@ -16,7 +15,20 @@ export default function AlertDialogSlide(props) {
       >
         <DialogContent className="timerDialog">
           <DialogTitle>In {props.remind} seconds</DialogTitle>
-          <DialogContentText>{props.textObj.message}</DialogContentText>
+          {props.textObj.message.map((msg) => {
+            return (
+              <DialogContentText
+                key={msg}
+                sx={{
+                  fontSize: 30,
+                  color: "331D2C",
+                }}
+              >
+                {msg}
+              </DialogContentText>
+            );
+          })}
+
           <DialogContentText>{props.textObj.dayAndRosh}</DialogContentText>
         </DialogContent>
       </Dialog>

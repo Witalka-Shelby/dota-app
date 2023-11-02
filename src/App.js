@@ -11,7 +11,7 @@ function App() {
   const [remind, setRemind] = useState(15);
   const [runeMessage, setRuneMessage] = useState({
     title: `In ${remind} seconds`,
-    message: "",
+    message: [],
     dayAndRosh: "Day and Rosh is Bot",
   });
   const [pause, setPause] = useState(false);
@@ -32,21 +32,21 @@ function App() {
 
   useEffect(() => {
     //Implementing the setInterval method
-    const fetchData = async () => {
-      const response = await fetch("dotaapi");
-      const api = await response.json();
-      setCount(api.time);
-    };
+    // const fetchData = async () => {
+    //   const response = await fetch("dotaapi");
+    //   const api = await response.json();
+    //   setCount(api.time);
+    // };
 
     const interval = setInterval(() => {
-      let message = "";
+      let message = [];
 
       // Bounty 3 min
       if (runes.bounty) {
         if ((count + remind) % 180 === 0) {
-          message += "Bounty \n";
+          message.push("Bounty");
           if (count >= 60) {
-            message += "Lotus \n";
+            message.push("Lotus");
           }
           setMsgActive(true);
           setTimeout(() => setMsgActive(false), 5000);
@@ -58,9 +58,9 @@ function App() {
         if ((count + remind) % 120 === 0 && count > 60) {
           if (count > 60) {
             if (count < 300) {
-              message += "Water \n";
+              message.push("Water");
             } else {
-              message += "Power \n";
+              message.push("Power");
             }
             setMsgActive(true);
             setTimeout(() => setMsgActive(false), 5000);
@@ -71,7 +71,7 @@ function App() {
       // Wisdom 7 min
       if (runes.wisdom) {
         if ((count + remind) % 420 === 0 && count > 60) {
-          message += "Wisdom \n";
+          message.push("Wisdom");
           setMsgActive(true);
           setTimeout(() => setMsgActive(false), 5000);
         }
@@ -96,7 +96,7 @@ function App() {
       // Tormentor 20 min
       if (runes.tormentor) {
         if ((count + remind) % 1200 === 0 && count > 60) {
-          message += "Tormentor \n";
+          message.push("Tormentor");
           setMsgActive(true);
           setTimeout(() => setMsgActive(false), 5000);
         }
@@ -107,28 +107,28 @@ function App() {
           (count + remind) % neutralsTimeList.current[neutralsCount] === 0 &&
           count > 60
         ) {
-          message += `Neutrals Tier ${neutralsCount + 1} \n`;
+          message.push(`Neutrals Tier ${neutralsCount + 1}`);
           setMsgActive(true);
           setNeutralsCount(neutralsCount + 1);
           setTimeout(() => setMsgActive(false), 5000);
         }
       }
 
-      if (message !== "") {
+      if (message.length !== 0) {
         setRuneMessage((prevMsg) => {
           return { ...prevMsg, message: message };
         });
       }
 
-      // call the function
-      fetchData()
-        // make sure to catch any error
-        .catch(console.error);
+      // // call the function
+      // fetchData()
+      //   // make sure to catch any error
+      //   .catch(console.error);
 
-      // if (!pause) {
-      //   setCount(count + 1);
-      // }
-    }, 1000);
+      if (!pause) {
+        setCount(count + 1);
+      }
+    }, 200);
 
     //Clearing the interval
     return () => clearInterval(interval);
